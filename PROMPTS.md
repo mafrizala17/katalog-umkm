@@ -49,14 +49,17 @@ Catat prompt penting selama membangun aplikasi: apa yang kamu minta, hasilnya, d
 **Baca docs/user-stories.md bagian US-05. Buat Server Action ganti password di app/admin/actions.js untuk admin yang sedang login, memakai Supabase Auth. Validasi di server: password baru minimal 8 karakter dan harus sama dengan konfirmasi. Tampilkan pesan berhasil atau pesan error yang jelas di halaman. Sambungkan ke form di app/admin/password/page.jsx tanpa mengubah tampilannya. Hapus CatatanBelumAktif dari halaman ini.**
 
 **Hasil:**
+**File yang Diubah app/admin/actions.js: Menambahkan Server Action gantiPassword(formData): Memeriksa sesi admin di server via supabase.auth.getUser(). Jika belum login, dialihkan ke /admin/login. Validasi server: memastikan password baru minimal 8 karakter dan sama persis dengan konfirmasi password. Memperbarui password menggunakan supabase.auth.updateUser({ password }). Mengalihkan ke /admin/password?berhasil=... jika sukses, atau /admin/password?error=... jika gagal/validasi tidak lolos. app/admin/password/page.jsx: Menyambungkan form ke action gantiPassword. Menampilkan kotak pesan berhasil (text-utama) atau pesan error (text-bahaya). Menghapus komponen CatatanBelumAktif. Mempertahankan tampilan dan layout halaman.**
 
 **Perbaikan:**
 
 ## US-06 Proteksi halaman admin
 
 **Prompt:**
+**Baca AGENTS.md aturan keamanan nomor 3 dan 4, dan docs/user-stories.md bagian US-06. Buat file proxy.js di root proyek (Next.js 16). Semua rute /admin kecuali /admin/login wajib login dengan Supabase Auth; kalau belum login, alihkan ke /admin/login. Pastikan juga setiap Server Action yang mengubah data memeriksa login di server. Hapus CatatanBelumAktif dari halaman /admin.**
 
 **Hasil:**
+**File yang Dibuat & Diubah proxy.js (di root proyek): Menggunakan @supabase/ssr (createServerClient) untuk membaca sesi login dari cookie request. Mengonfigurasi matcher: ["/admin", "/admin/:path*"]. Mengalihkan pengunjung yang belum login ke /admin/login saat mengakses rute /admin mana pun (kecuali /admin/login). Mengalihkan admin yang sudah login langsung ke /admin jika mencoba membuka /admin/login. app/admin/actions.js: Memastikan Server Action yang mengubah data (seperti gantiPassword) memeriksa sesi admin di server via supabase.auth.getUser() sebelum memproses data. app/admin/page.jsx: Menghapus komponen CatatanBelumAktif.**
 
 **Perbaikan:**
 
