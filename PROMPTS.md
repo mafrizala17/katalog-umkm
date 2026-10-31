@@ -36,14 +36,17 @@ Catat prompt penting selama membangun aplikasi: apa yang kamu minta, hasilnya, d
 ## US-04 Login admin
 
 **Prompt:**
+**Baca AGENTS.md bagian aturan keamanan dan docs/user-stories.md bagian US-04.Buat login admin memakai Supabase Auth (email dan password) dengan @supabase/ssr dan cookie, memakai SUPABASE_URL dan SUPABASE_PUBLISHABLE_KEY. Login diproses dengan Server Action di app/admin/actions.js dan disambungkan ke form di app/admin/login/page.jsx. Login berhasil diarahkan ke /admin; login gagal menampilkan pesan error yang jelas di halaman login. Buat juga tombol "Keluar" di components/NavAdmin.jsx berfungsi: mengakhiri sesi lalu kembali ke /admin/login. Jangan ubah tampilan. Hapus CatatanBelumAktif dari halaman login.**
 
 **Hasil:**
+**File yang Dibuat & Diubahlib/supabase/auth.js & lib/supabase/index.js:Membuat fungsi buatClientAuth() yang menginisialisasi @supabase/ssr (createServerClient) dengan cookies() dari next/headersmenggunakan SUPABASE_URL dan SUPABASE_PUBLISHABLE_KEY. app/admin/actions.js:Membuat Server Action login(formData): memvalidasi input, memanggil supabase.auth.signInWithPassword({ email password }), danmengarahkan ke /admin jika berhasil atau kembali ke /admin/login?error=... jika gagal.Membuat Server Action keluar(): memanggil supabase.auth.signOut() dan mengarahkan kembali ke /admin/login. app/admin/login/page.jsx:Menyambungkan form ke action login.Menampilkan pesan error jika login gagal.Menghapus komponen CatatanBelumAktif.components/NavAdmin.jsx:Memfungsikan tombol "Keluar" menggunakan form Server Action keluar. Tampilan tombol tetap dipertahankan.**
 
 **Perbaikan:**
 
 ## US-05 Ganti password
 
 **Prompt:**
+**Baca docs/user-stories.md bagian US-05. Buat Server Action ganti password di app/admin/actions.js untuk admin yang sedang login, memakai Supabase Auth. Validasi di server: password baru minimal 8 karakter dan harus sama dengan konfirmasi. Tampilkan pesan berhasil atau pesan error yang jelas di halaman. Sambungkan ke form di app/admin/password/page.jsx tanpa mengubah tampilannya. Hapus CatatanBelumAktif dari halaman ini.**
 
 **Hasil:**
 
