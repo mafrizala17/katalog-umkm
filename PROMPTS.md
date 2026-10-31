@@ -16,16 +16,20 @@ Catat prompt penting selama membangun aplikasi: apa yang kamu minta, hasilnya, d
 ## US-02 Detail produk
 
 **Prompt:**
+**Baca docs/user-stories.md bagian US-02. Ubah app/produk/[id]/page.jsx supaya mengambil satu produk dari tabel "produk" di Supabase berdasarkan id di URL, di sisi server, memakai koneksi Supabase yang sudah dibuat di lib/supabase. Kalau produk tidak ditemukan, panggil notFound(). Jangan ubah tampilannya. Hapus CatatanBelumAktif dari halaman ini, tapi biarkan tombol WhatsApp.**
 
 **Hasil:**
+**Pengerjaan US-02: Detail produk telah selesai. File yang Diubah app/produk/[id]/page.jsx: Mengambil data satu produk dari tabel produk di Supabase berdasarkan parameter id di URL menggunakan buatClientServer(). Memanggil notFound() dari Next.js jika data tidak ditemukan atau terjadi kesalahan query sehingga menampilkan halaman 404 bawaan aplikasi. Mempertahankan tampilan, tombol WhatsApp, dan layout halaman. Menghapus penggunaan data contoh serta komponen CatatanBelumAktif.**
 
 **Perbaikan:**
 
 ## US-03 Pesan via WhatsApp
 
 **Prompt:**
+**Baca docs/rancangan-teknis.md bagian "Pesan WhatsApp (US-03)". Ubah components/TombolWhatsApp.jsx menjadi tautan yang membuka https://wa.me/ ke nomor di lib/toko.js, dengan pesan otomatis berisi nama dan harga produk dalam format rupiah. Pesan di-encode dengan encodeURIComponent dan dibuka di tab baru. Pertahankan tampilan tombolnya. Hapus CatatanBelumAktif yang menyebut US-03 di halaman detail produk.**
 
 **Hasil:**
+**Pengerjaan US-03: Pesan via WhatsApp telah selesai.File yang Diubah components/TombolWhatsApp.jsx: Mengubah elemen tombol menjadi tautan <a> dengan target _blank dan rel="noopener noreferrer". Mengarahkan ke format https://wa.me/<nomorWhatsApp>?text=<pesan> menggunakan nomor dari lib/toko.js. Pesan otomatis memuat nama dan harga produk dalam format rupiah menggunakan fungsi formatRupiah(), yang di-encode dengan encodeURIComponent. Mempertahankan tampilan tombol (inline-flex, warna bg-utama, hover, dsb.). Komponen CatatanBelumAktif di halaman detail produk (app/produk/[id]/page.jsx) sudah dipastikan bersih.**
 
 **Perbaikan:**
 
